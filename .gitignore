@@ -69,6 +69,7 @@ local.properties
 #.settings/
 .loadpath
 .recommenders
+RemoteSystemsTempFiles/
 
 # External tool builders
 .externalToolBuilders/
