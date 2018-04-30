@@ -1,12 +1,15 @@
 package com.nstoya.thrillio.managers;
 
+import com.nstoya.thrillio.dao.BookmarkDao;
 import com.nstoya.thrillio.entities.Book;
+import com.nstoya.thrillio.entities.Bookmark;
 import com.nstoya.thrillio.entities.Movie;
 import com.nstoya.thrillio.entities.Weblink;
 
 public class BookmarkManager {
 
 	private static BookmarkManager instance = new BookmarkManager();
+	private static BookmarkDao dao = new BookmarkDao();
 
 	private BookmarkManager() {
 
@@ -57,4 +60,8 @@ public class BookmarkManager {
 		return link;
 	}
 
+	
+	public static Bookmark[][] getBookmarks(){
+		return dao.getBookmarks();
+	}
 }

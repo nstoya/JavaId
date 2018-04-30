@@ -1,12 +1,14 @@
 package com.nstoya.thrillio.managers;
 
+import com.nstoya.thrillio.dao.UserDao;
 import com.nstoya.thrillio.entities.User;
 
 public class UserManager {
 	// Can be called Manager or Service
 
 	private static UserManager instance = new UserManager();
-
+	private static UserDao dao = new UserDao();
+	
 	private UserManager() {
 	}
 
@@ -26,5 +28,9 @@ public class UserManager {
 		user.setUserType(userType);
 		
 		return user;
+	}
+	
+	public User[] getUsers() {
+		return dao.getUsers();
 	}
 }
