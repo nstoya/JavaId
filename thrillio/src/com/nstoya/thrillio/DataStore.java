@@ -12,13 +12,14 @@ import com.nstoya.thrillio.managers.UserManager;
 
 public class DataStore {
 
-	private static final int USER_BOOKMARK_LIMIT = 5;
-	private static final int BOOKMARK_COUNT_PER_TYPE = 5;
-	private static final int BOOKMARK_TYPES_COUNT = 3;
-	private static final int TOTAL_USER_COUNT = 5;
+	public static final int USER_BOOKMARK_LIMIT = 5;
+	public static final int BOOKMARK_COUNT_PER_TYPE = 5;
+	public static final int BOOKMARK_TYPES_COUNT = 3;
+	public static final int TOTAL_USER_COUNT = 5;
 	private static User[] users = new User[TOTAL_USER_COUNT];
 	private static Bookmark[][] bookmarks = new Bookmark[BOOKMARK_TYPES_COUNT][BOOKMARK_COUNT_PER_TYPE];
 	private static UserBookmark[] userBookmarks = new UserBookmark[TOTAL_USER_COUNT * USER_BOOKMARK_LIMIT];
+	private static int bookmarkIndex = 0;
 
 	public static void loadData() {
 		loadUsers();
@@ -61,14 +62,15 @@ public class DataStore {
 
 	private static void loadMovies() {
 		bookmarks[1][0] = BookmarkManager.getInstance().createMovie(3000, "Citizen Kane", "", 1941,
-				new String[] { "Orson Welles", "Joseph Cotten" }, new String[] { "Orson Welles" }, MovieGenre.CLASSICS, 8.5);
+				new String[] { "Orson Welles", "Joseph Cotten" }, new String[] { "Orson Welles" }, MovieGenre.CLASSICS,
+				8.5);
 		bookmarks[1][1] = BookmarkManager.getInstance().createMovie(3001, "The Grapes of Wrath", "", 1940,
 				new String[] { "Henry Fonda", "Jane Darwell" }, new String[] { "John Ford" }, MovieGenre.CLASSICS, 8.2);
 		bookmarks[1][2] = BookmarkManager.getInstance().createMovie(3002, "A Touch of Greatness", "", 2004,
 				new String[] { "Albert Cullum" }, new String[] { "Leslie Sullivan" }, MovieGenre.DOCUMENTARIES, 7.3);
 		bookmarks[1][3] = BookmarkManager.getInstance().createMovie(3003, "The Big Bang Theory", "", 2007,
-				new String[] { "Kaley Cuoco", "Jim Parsons" }, new String[] { "Chuck Lorre", "Bill Prady" }, MovieGenre.TV_SHOWS,
-				8.7);
+				new String[] { "Kaley Cuoco", "Jim Parsons" }, new String[] { "Chuck Lorre", "Bill Prady" },
+				MovieGenre.TV_SHOWS, 8.7);
 		bookmarks[1][4] = BookmarkManager.getInstance().createMovie(3004, "Ikiru", "", 1952,
 				new String[] { "Takashi Shimura", "Minoru Chiaki" }, new String[] { "Akira Kurosawa" },
 				MovieGenre.FOREIGN_MOVIES, 8.4);
@@ -100,6 +102,11 @@ public class DataStore {
 	public static UserBookmark[] getUserBookmarks() {
 		return userBookmarks;
 	}
-	
-	
+
+	public static void add(UserBookmark userBookmark) {
+		userBookmarks[bookmarkIndex] = userBookmark;
+		bookmarkIndex++;
+
+	}
+
 }
