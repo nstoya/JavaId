@@ -24,6 +24,8 @@ public class HttpConnect {
 		if(destination == 0) {
 			//try to write data to file, but the file is missing, so an exception is generated
 			throw new FileNotFoundException();
+		}else if (destination == 1) {
+			throw new IOException();
 		}
 		
 		System.out.println("\nEnd send");
