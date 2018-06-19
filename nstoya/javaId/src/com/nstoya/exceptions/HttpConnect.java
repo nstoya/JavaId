@@ -14,8 +14,9 @@ public class HttpConnect {
 	 * @throws IOException
 	 * @throws IllegalArgumentException generated if destination < 0 || destination > 1
 	 */
-	public static void send(int destination, String data, String partner) throws IOException {
+	public static String send(int destination, String data, String partner) throws IOException {
 		System.out.println("\nStart send");
+		String response = "success";
 		
 		if (destination < 0 || destination > 1) {
 			throw new IllegalArgumentException();
@@ -25,10 +26,12 @@ public class HttpConnect {
 			//try to write data to file, but the file is missing, so an exception is generated
 			throw new FileNotFoundException();
 		}else if (destination == 1) {
-			throw new IOException();
+			//throw new IOException();
+			response = "<result><code>success</code></result>";
 		}
 		
 		System.out.println("\nEnd send");
+		return response;
 	}
 
 }

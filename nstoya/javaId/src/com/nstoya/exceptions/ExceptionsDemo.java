@@ -24,13 +24,27 @@ public class ExceptionsDemo {
 		System.out.println("\nStart share");
 		
 		try {
-			HttpConnect.send(0, "hello","http://www.goodsnips.com");
+			String responce = HttpConnect.send(1, "hello","http://www.goodsnips.com");
 			System.out.println("\nStart share, send invoked");
+			APIParser.parseSendREsponseCode(responce, "hello", "http://www.goodsnips.com");
 		} catch (FileNotFoundException e) {
 			System.out.println("Share, throwing FileNotFound");
 			throw e;
 		} catch (IOException e) {
 			System.out.println("Connecting to a different server ...");
+		} catch (APIFormatChangeException e) {
+			// Item 65: Don't ignore exceptions
+			e.printStackTrace();
+			
+			//Item 63: Include failure-capture information  in detail messages
+			//System.out.println("e.toString " + e);
+			//System.out.println("e.getMessage: " + e.getMessage());
+			
+			//Item 63: 
+			System.out.println("e.getElementName(): " + e.getElementName());
+			
+			//Item 61: Throw exceptopns appropriate to the abstraction
+			e.getCause().printStackTrace(); //shows only the lower lever exception
 		}finally {
 			System.out.println("Share finally");
 		}
